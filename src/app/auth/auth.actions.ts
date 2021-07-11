@@ -7,3 +7,6 @@ export const login = createAction(
     props<{user: User}>()
 );
 
+export const logout = createAction(
+    "[Top Menu] Logout"
+);

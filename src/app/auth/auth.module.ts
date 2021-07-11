@@ -19,7 +19,9 @@ import * as fromAuth from './reducers';
         MatInputModule,
         MatButtonModule,
         RouterModule.forChild([{path: '', component: LoginComponent}]),
-        StoreModule.forFeature('auth', fromAuth.reducers),
+        StoreModule.forFeature(
+            'auth', fromAuth.authReducer
+            ),
 
     ],
     declarations: [LoginComponent],

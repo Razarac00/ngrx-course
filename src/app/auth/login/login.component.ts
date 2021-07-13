@@ -45,7 +45,7 @@ export class LoginComponent implements OnInit {
         console.log(user);
         // saving to store
         this.store.dispatch(login({user})); 
-        //since the props' name is the same as the value, we can remove :user from the {}
+        // since the props' name is the same as the value, we can remove :user from the {}
 
         this.router.navigateByUrl('/courses');
       })

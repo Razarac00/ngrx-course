@@ -23,6 +23,7 @@ import { AuthGuard } from './auth.guard';
         StoreModule.forFeature(
             'auth', fromAuth.authReducer
             ),
+        EffectsModule.forFeature([])
 
     ],
     declarations: [LoginComponent],

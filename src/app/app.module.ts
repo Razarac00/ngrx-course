@@ -56,7 +56,8 @@ const routes: Routes = [
     MatToolbarModule,
     AuthModule.forRoot(),
     StoreModule.forRoot(reducers, { metaReducers }),
-    StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: environment.production }) // browser: extension.remotedev.io
+    StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: environment.production }), // browser: extension.remotedev.io, redux devtools extension
+    EffectsModule.forRoot([]) // for use with side-effects: storing data not just in the store but elsewhere, like localstorage or a db
   ],
   bootstrap: [AppComponent]
 })

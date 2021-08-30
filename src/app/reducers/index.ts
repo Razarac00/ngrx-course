@@ -16,6 +16,15 @@ export const reducers: ActionReducerMap<AppState> = {
   router: routerReducer //now the store will have the state of the store passed into each state
 };
 
+// metareducers are js/ts functions that occur before any reguler reducer occurs.
+export function logger(reducer: ActionReducer<any>): ActionReducer<any> {
+  return (state, action) => {
+    console.log("state before: ", state);
+    console.log("action", action);
+
+    return reducer(state, action);
+  }
+}
 
 export const metaReducers: MetaReducer<AppState>[] = 
-  !environment.production ? [] : [];
+  !environment.production ? [logger] : []; // metareducers executed in the order they appear in this array

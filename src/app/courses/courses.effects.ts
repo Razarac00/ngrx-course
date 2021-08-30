@@ -17,6 +17,16 @@ export class CoursesEffects {
         )
     ); // setup the effect on action loadAllCourses to get all the courses from the service, then map it to allCoursesLoaded
 
+    saveCourses$ = createEffect( // optimistically update the backend
+        () => this.actions$.pipe(
+            ofType(CourseActions.courseUpdated),
+            concatMap(action => this.coursesHttpService.saveCourse(
+                action.update.id, action.update.changes
+            ))
+        ),
+        {dispatch: false}
+    );
+
     constructor(private actions$: Actions, private coursesHttpService: CoursesHttpService) {
 
     }

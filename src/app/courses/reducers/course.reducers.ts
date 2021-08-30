@@ -1,7 +1,7 @@
 import { createEntityAdapter, EntityState } from "@ngrx/entity";
 import { createReducer, on } from "@ngrx/store";
 import { CourseActions } from "../action-types";
-import { Course } from "../model/course";
+import { compareCourses, Course } from "../model/course";
 
 
 export interface CoursesState extends EntityState<Course> {
@@ -10,7 +10,10 @@ export interface CoursesState extends EntityState<Course> {
     // above gets unweildy to manage yourself with more complex objects, so use ngrx built-in instead
 }
 
-export const adapter = createEntityAdapter<Course>(); 
+export const adapter = createEntityAdapter<Course>({
+    sortComparer: compareCourses,
+    // selectId: course => course.id // in the event that the id is custom--i.e., not named 'id'
+}); 
 // bam, now I don't have to make my own crud functionality to deal with the uncommented code earlier
 
 export const initialCoursesState = adapter.getInitialState();

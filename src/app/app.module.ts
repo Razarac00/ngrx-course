@@ -55,7 +55,15 @@ const routes: Routes = [
     MatListModule,
     MatToolbarModule,
     AuthModule.forRoot(),
-    StoreModule.forRoot(reducers, { metaReducers }),
+    StoreModule.forRoot(reducers, { 
+      metaReducers,
+      runtimeChecks: {
+        strictStateImmutability: true, // now reducers cannot modify the store state--makes the store readonly
+        strictActionImmutability: true, // stops actions from being mutated as well, modifying it would break the debugger
+        strictActionSerializability: true, // ensures actions are serializable in js
+        strictStateSerializability: true // ensures state in the store is always serializable
+      } 
+    }),
     StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: environment.production }), // browser: extension.remotedev.io, redux devtools extension
     EffectsModule.forRoot([]), // for use with side-effects: storing data not just in the store but elsewhere, like localstorage or a db
     StoreRouterConnectingModule.forRoot({

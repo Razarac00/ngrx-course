@@ -25,7 +25,10 @@ export const coursesReducer = createReducer(
     initialCoursesState,
     // nice, was worried about having to write everything up again, but the adapter adds it all by itself
     on(CourseActions.allCoursesLoaded, 
-        (state, action) => adapter.addAll(action.courses, {...state, allCoursesLoaded: true})) // {...obj} makes a shallow copy
+        (state, action) => adapter.addAll(action.courses, 
+            {...state, allCoursesLoaded: true})), // {...obj} makes a shallow copy
+
+    on(CourseActions.courseUpdated, (state, action) => adapter.updateOne(action.update, state)) // after updating, change the state
 );
 
 export const {

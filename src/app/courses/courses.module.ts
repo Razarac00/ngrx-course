@@ -27,6 +27,7 @@ import {compareCourses, Course} from './model/course';
 import {compareLessons, Lesson} from './model/lesson';
 import { CourseEntityService } from './services/course-entity.service';
 import { CoursesResolver } from './services/courses.resolver';
+import { CoursesDataService } from './services/courses-data.service';
 
 
 export const coursesRoutes: Routes = [
@@ -89,13 +90,19 @@ const entityMetadata : EntityMetadataMap = {
   providers: [
     CoursesHttpService,
     CourseEntityService,
-    CoursesResolver
+    CoursesResolver,
+    CoursesDataService
   ]
 })
 export class CoursesModule {
 
-  constructor(private eds: EntityDefinitionService) {
+  constructor(
+    private eds: EntityDefinitionService, 
+    private entityDataService: EntityDataService, 
+    private coursesDataService: CoursesDataService) {
+
     eds.registerMetadataMap(entityMetadata);
+    entityDataService.registerService('Course', coursesDataService); // rather than auto lookup the courses in courses resolver, use this dataservice instead
   }
 
 

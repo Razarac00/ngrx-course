@@ -50,7 +50,13 @@ export const coursesRoutes: Routes = [
 
 const entityMetadata : EntityMetadataMap = {
   Course: {
-    sortComparer: compareCourses
+    sortComparer: compareCourses,
+    entityDispatcherOptions: {
+      optimisticUpdate: true, // without this flag, the update will be pessimistic: the data displayed to the user will not
+      // update until the actual update in the backend has gone through. Optimistic will reverse this
+      //optimisticAdd: true // it's possible to make posting optimistic, but usually we don't since generating ids tends
+      // to be done in the backend not on the client
+    }
   }
 };
 
